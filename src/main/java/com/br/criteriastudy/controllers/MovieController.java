@@ -2,7 +2,7 @@ package com.br.criteriastudy.controllers;
 
 import java.util.List;
 
-import com.br.criteriastudy.entities.Movie;
+import com.br.criteriastudy.repositories.criteria.params.MovieFilterParam;
 import com.br.criteriastudy.services.MovieService;
 import com.br.criteriastudy.services.DTO.MovieDTO;
 
@@ -35,8 +35,8 @@ public class MovieController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MovieDTO>> getMovies() {
-        return ResponseEntity.ok().body(this.movieService.getAll());
+    public ResponseEntity<List<MovieDTO>> getMovies(MovieFilterParam params) {
+        return ResponseEntity.ok().body(this.movieService.getAll(params));
     }
 
     @GetMapping("/{id}")

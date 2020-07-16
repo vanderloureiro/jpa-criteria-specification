@@ -1,18 +1,43 @@
 package com.br.criteriastudy.services.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.br.criteriastudy.entities.Movie;
 import com.br.criteriastudy.services.DTO.MovieDTO;
 
-import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring")
-public interface MovieMapper {
+@Component
+public class MovieMapper {
     
-    Movie toEntity(MovieDTO movieDto);
+    public Movie toEntity(MovieDTO movieDto) {
+        Movie movie = new Movie();
+        movie.setId(movieDto.getId());
+        movie.setTitle(movieDto.getTitle());
+        movie.setSinopse(movieDto.getSinopse());
+        movie.setCategory(movieDto.getCategory());
+        movie.setDirector(movieDto.getDirector());
+        movie.setReleaseDate(movieDto.getReleaseDate());
+        return movie;
+    }
     
-    MovieDTO toDto(Movie movie);
+    public MovieDTO toDto(Movie movie) {
+        MovieDTO dto = new MovieDTO();
+        dto.setId(movie.getId());
+        dto.setTitle(movie.getTitle());
+        dto.setSinopse(movie.getSinopse());
+        dto.setCategory(movie.getCategory());
+        dto.setDirector(movie.getDirector());
+        dto.setReleaseDate(movie.getReleaseDate());
+        return dto;
+    }
 
-    List<MovieDTO> toDto(List<Movie> movieList);
+    public List<MovieDTO> toDto(List<Movie> movieList) {
+        List<MovieDTO> dtos = new ArrayList<>();
+        movieList.forEach(movie -> {
+            dtos.add(this.toDto(movie));
+        });
+        return dtos;
+    }
 }

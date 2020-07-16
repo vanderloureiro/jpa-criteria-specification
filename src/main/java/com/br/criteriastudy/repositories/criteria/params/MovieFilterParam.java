@@ -12,6 +12,6 @@ public class MovieFilterParam {
     private String title;
     private CategoryEnum category;
     private String director;
-    private LocalDate releaseYear;
+    private LocalDate releaseDate;
     
 }
