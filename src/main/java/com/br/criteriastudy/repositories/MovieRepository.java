@@ -1,11 +1,12 @@
 package com.br.criteriastudy.repositories;
 
 import com.br.criteriastudy.entities.Movie;
+import com.br.criteriastudy.repositories.criteria.MovieCriteriaCustom;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MovieRepository extends JpaRepository<Movie, Long>{
+public interface MovieRepository extends JpaRepository<Movie, Long>, MovieCriteriaCustom {
     
 }
