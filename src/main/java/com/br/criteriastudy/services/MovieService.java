@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import com.br.criteriastudy.entities.Movie;
 import com.br.criteriastudy.repositories.MovieRepository;
+import com.br.criteriastudy.services.DTO.MovieDTO;
+import com.br.criteriastudy.services.mapper.MovieMapper;
 
 import org.springframework.stereotype.Service;
 
@@ -12,23 +14,26 @@ import org.springframework.stereotype.Service;
 public class MovieService {
     
     private MovieRepository movieRepository;
+    private MovieMapper movieMapper;
 
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService(MovieRepository movieRepository, MovieMapper movieMapper) {
         this.movieRepository = movieRepository;
+        this.movieMapper = movieMapper;
     }
 
-    public Movie saveMovie(Movie movie) {
-        return this.movieRepository.save(movie);
+    public MovieDTO saveMovie(MovieDTO movie) {
+        Movie movieToSave = this.movieMapper.toEntity(movie);
+        return this.movieMapper.toDto(this.movieRepository.save(movieToSave));
     }
 
-    public List<Movie> getAll() {
-        return this.movieRepository.findAll();
+    public List<MovieDTO> getAll() {
+        return this.movieMapper.toDto(this.movieRepository.findAll());
     }
 
-    public Movie getById(Long id) {
+    public MovieDTO getById(Long id) {
         Optional<Movie> opMovie = this.movieRepository.findById(id);
         if (opMovie.isPresent()) {
-            return opMovie.get();
+            return this.movieMapper.toDto(opMovie.get());
         } else { return null; }
     }
 }

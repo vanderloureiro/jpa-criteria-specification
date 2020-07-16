@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.br.criteriastudy.entities.Movie;
 import com.br.criteriastudy.services.MovieService;
+import com.br.criteriastudy.services.DTO.MovieDTO;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,17 +30,17 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<Movie> postMovie(@RequestBody Movie movieToSave) {
+    public ResponseEntity<MovieDTO> postMovie(@RequestBody MovieDTO movieToSave) {
         return ResponseEntity.ok().body(this.movieService.saveMovie(movieToSave));
     }
 
     @GetMapping
-    public ResponseEntity<List<Movie>> getMovies() {
+    public ResponseEntity<List<MovieDTO>> getMovies() {
         return ResponseEntity.ok().body(this.movieService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
+    public ResponseEntity<MovieDTO> getMovie(@PathVariable Long id) {
         return ResponseEntity.ok().body(this.movieService.getById(id));
     }
 }
