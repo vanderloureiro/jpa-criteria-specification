@@ -1,5 +1,6 @@
 package com.br.criteriastudy.repositories.criteria.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -39,19 +40,34 @@ public class MovieRepositoryCustomImpl implements MovieRepositoryCustom {
          * entity), and we store it in the Movie variable for later use
          */
         Root<Movie> movie = query.from(Movie.class);
+
+        /**
+         * Create a dinamic list of predicates
+         */
+        List<Predicate> predicates = new ArrayList<>();
         /**
          * Next, with CriteriaBuilder we create predicates against our Movie entity.
          * Note, that these predicates don't have any effect yet
          */
 
-        Predicate titlePredicate = criteriaBuilder.like(movie.get("title"), "%" + params.getTitle() + "%");
-        Predicate categoryePredicate = criteriaBuilder.equal(movie.get("category"), params.getCategory());
+        if ( params.getTitle() != null) {
+            predicates.add(criteriaBuilder.like(movie.get("title"), "%" + params.getTitle() + "%"));
+        }
+        if ( params.getCategory() != null) {
+            predicates.add(criteriaBuilder.equal(movie.get("category"), params.getCategory()));
+        }
         /**
          * We apply both predicates to our CriteriaQuery.
          * CriteriaQuery.where(Predicate…) combines its arguments in a logical and. This
          * is the point when we tie these predicates to the query
          */
-        query.where(titlePredicate, categoryePredicate);
+
+        /**
+        Verify the predicates to add in where clause
+        */
+        if (!predicates.isEmpty()) {
+            query.where(predicates.toArray(new Predicate[predicates.size()]));
+        }
         /**
          * After that, we create a TypedQuery<Movie> instance from our CriteriaQuery
          */
