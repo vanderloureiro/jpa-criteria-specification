@@ -53,8 +53,14 @@ public class MovieRepositoryCustomImpl implements MovieRepositoryCustom {
         if ( params.getTitle() != null) {
             predicates.add(criteriaBuilder.like(movie.get("title"), "%" + params.getTitle() + "%"));
         }
+        if ( params.getDirector() != null) {
+            predicates.add(criteriaBuilder.like(movie.get("director"), "%" + params.getTitle() + "%"));
+        }
         if ( params.getCategory() != null) {
             predicates.add(criteriaBuilder.equal(movie.get("category"), params.getCategory()));
+        }
+        if ( params.getReleaseDate() != null) {
+            predicates.add(criteriaBuilder.equal(movie.get("releaseDate"), params.getReleaseDate()));
         }
         /**
          * We apply both predicates to our CriteriaQuery.
@@ -66,7 +72,7 @@ public class MovieRepositoryCustomImpl implements MovieRepositoryCustom {
         Verify the predicates to add in where clause
         */
         if (!predicates.isEmpty()) {
-            query.where(predicates.toArray(new Predicate[predicates.size()]));
+            query.where( predicates.stream().toArray( Predicate[]::new ) );
         }
         /**
          * After that, we create a TypedQuery<Movie> instance from our CriteriaQuery
