@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -28,9 +29,10 @@ public class MovieControllerTest {
 
     @Test
     public void successWithGet() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/movie")
-            .contentType("application/json"))
-            .andExpect(MockMvcResultMatchers.status().isOk());
+        ResultActions perform = mockMvc.perform(MockMvcRequestBuilders.get("/movie")
+            .contentType("application/json"));
+
+        perform.andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
@@ -38,9 +40,10 @@ public class MovieControllerTest {
         MovieFilterParam param = new MovieFilterParam();
         param.setCategory(CategoryEnum.ACTION);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/movie", objectMapper.writeValueAsString(param))
-            .contentType("application/json"))
-            .andExpect(MockMvcResultMatchers.status().isOk());
+        ResultActions perform = mockMvc.perform(MockMvcRequestBuilders.get("/movie", objectMapper.writeValueAsString(param))
+            .contentType("application/json"));
+
+        perform.andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
@@ -52,10 +55,11 @@ public class MovieControllerTest {
         dto.setTitle("Random title");
         dto.setDirector("Scorsese");
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/movie")
+        ResultActions perform = mockMvc.perform(MockMvcRequestBuilders.post("/movie")
                         .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(dto)))
-                        .andExpect(MockMvcResultMatchers.status().isOk());
+                        .content(objectMapper.writeValueAsString(dto)));
+
+        perform.andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     
