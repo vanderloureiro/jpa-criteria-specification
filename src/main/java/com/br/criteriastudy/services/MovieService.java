@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.br.criteriastudy.entities.Movie;
+import com.br.criteriastudy.mapper.MovieMapper;
 import com.br.criteriastudy.repositories.MovieRepository;
 import com.br.criteriastudy.repositories.criteria.params.MovieFilterParam;
 import com.br.criteriastudy.services.DTO.MovieDTO;
-import com.br.criteriastudy.services.mapper.MovieMapper;
 
 import org.springframework.stereotype.Service;
 
