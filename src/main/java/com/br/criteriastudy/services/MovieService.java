@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.br.criteriastudy.entities.Movie;
+import com.br.criteriastudy.exceptions.NotFoundException;
 import com.br.criteriastudy.mapper.MovieMapper;
 import com.br.criteriastudy.repositories.MovieRepository;
 import com.br.criteriastudy.repositories.criteria.params.MovieFilterParam;
@@ -32,9 +33,23 @@ public class MovieService {
     }
 
     public MovieDTO getById(Long id) {
-        Optional<Movie> opMovie = this.movieRepository.findById(id);
-        if (opMovie.isPresent()) {
-            return this.movieMapper.toDto(opMovie.get());
-        } else { return null; }
+
+        Movie movieFound = this.movieRepository.findById(id).orElseThrow(() -> new NotFoundException());
+        return this.movieMapper.toDto(movieFound);
+    }
+
+    public MovieDTO update(Long id, MovieDTO form) {
+
+        this.movieRepository.findById(id).orElseThrow(() -> new NotFoundException());
+
+        Movie movieToUpdate = this.movieMapper.toEntity(form);
+        movieToUpdate.setId(id);
+        return this.movieMapper.toDto(this.movieRepository.save(movieToUpdate));
+    }
+
+    public void deleteById(Long id) {
+        this.movieRepository.findById(id).orElseThrow(() -> new NotFoundException());
+
+        this.movieRepository.deleteById(id);
     }
 }

@@ -35,20 +35,22 @@ public class MovieControllerTest {
     @Autowired
     private MovieRepository movieRepository; 
 
+    private Movie movie;
+
     @Before
     public void start() {
-        Movie movie = new Movie();
-        movie.setCategory(CategoryEnum.ACTION);
-        movie.setDirector("Tarantino");
-        movie.setSinopse("Django");
-        movie.setTitle("Django");
-        movie.setReleaseDate(LocalDate.of(2000, Month.JANUARY, 20));
-        this.movieRepository.save(movie);
+        this.movie = new Movie();
+        this.movie.setCategory(CategoryEnum.ACTION);
+        this.movie.setDirector("Tarantino");
+        this.movie.setSinopse("Django");
+        this.movie.setTitle("Django");
+        this.movie.setReleaseDate(LocalDate.of(2000, Month.JANUARY, 20));
+        this.movie = this.movieRepository.save(this.movie);
     }
 
     @After
     public void end() {
-        this.movieRepository.deleteAll();
+        this.movieRepository.deleteById(this.movie.getId());
     }
 
     @Test
