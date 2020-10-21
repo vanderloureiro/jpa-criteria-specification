@@ -37,6 +37,8 @@ public class MovieControllerTest {
 
     private Movie movie;
 
+    private MovieDTO form;
+
     @Before
     public void start() {
         this.movie = new Movie();
@@ -46,6 +48,13 @@ public class MovieControllerTest {
         this.movie.setTitle("Django");
         this.movie.setReleaseDate(LocalDate.of(2000, Month.JANUARY, 20));
         this.movie = this.movieRepository.save(this.movie);
+
+        this.form = new MovieDTO();
+        this.form.setCategory(CategoryEnum.ACTION);
+        this.form.setDirector("Tarantino");
+        this.form.setSinopse("Kill Bill");
+        this.form.setTitle("Kill Bill");
+        this.form.setReleaseDate(LocalDate.of(2002, Month.JANUARY, 20));
     }
 
     @After
@@ -62,12 +71,7 @@ public class MovieControllerTest {
 
     @Test
     public void createNewMovie() {
-        MovieDTO form = new MovieDTO();
-        form.setCategory(CategoryEnum.ACTION);
-        form.setDirector("Tarantino");
-        form.setSinopse("Kill Bill");
-        form.setTitle("Kill Bill");
-        form.setReleaseDate(LocalDate.of(2002, Month.JANUARY, 20));
+
         HttpEntity<MovieDTO> httpEntity = new HttpEntity<>(form);
 
         ResponseEntity<MovieDTO> response = this.testRestTemplate.exchange("/movie", HttpMethod.POST, httpEntity, MovieDTO.class);
@@ -75,5 +79,22 @@ public class MovieControllerTest {
         assertEquals(response.getStatusCode(), HttpStatus.OK);
         assertEquals(response.getBody().getTitle(), "Kill Bill");
     }
+
+    @Test
+    public void successGettingMovieById() {
+        ResponseEntity<MovieDTO> response = this.testRestTemplate
+            .exchange("/movie/"+this.movie.getId(), HttpMethod.GET, null, MovieDTO.class);
+        
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void NotfoundMovieById() {
+        ResponseEntity<MovieDTO> response = this.testRestTemplate
+            .exchange("/movie/"+105452L, HttpMethod.GET, null, MovieDTO.class);
+        
+        Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
     
 }
