@@ -89,12 +89,38 @@ public class MovieControllerTest {
     }
 
     @Test
-    public void NotfoundMovieById() {
+    public void NotFoundMovieById() {
         ResponseEntity<MovieDTO> response = this.testRestTemplate
             .exchange("/movie/"+105452L, HttpMethod.GET, null, MovieDTO.class);
         
         Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
+    @Test
+    public void updateMovie() {
+
+        MovieDTO newForm = this.form;
+        newForm.setSinopse("New sinopse");
+        HttpEntity<MovieDTO> httpEntity = new HttpEntity<>(newForm);
+
+        ResponseEntity<MovieDTO> response = this.testRestTemplate
+            .exchange("/movie/"+this.movie.getId(), HttpMethod.PUT, httpEntity, MovieDTO.class);
     
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertEquals(response.getBody().getSinopse(), "New sinopse");
+    }
+
+    @Test
+    public void errorUpdateMovie() {
+
+        MovieDTO newForm = this.form;
+        newForm.setSinopse("New sinopse");
+        HttpEntity<MovieDTO> httpEntity = new HttpEntity<>(newForm);
+
+        ResponseEntity<MovieDTO> response = this.testRestTemplate
+            .exchange("/movie/"+25482L, HttpMethod.PUT, httpEntity, MovieDTO.class);
+    
+        assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
+    }
+
 }
