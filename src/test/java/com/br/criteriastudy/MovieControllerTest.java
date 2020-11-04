@@ -91,7 +91,7 @@ public class MovieControllerTest {
     @Test
     public void notFoundMovieById() {
         ResponseEntity<MovieDTO> response = this.testRestTemplate
-            .exchange("/movie/"+105452L, HttpMethod.GET, null, MovieDTO.class);
+            .exchange("/movie/"+ -2L, HttpMethod.GET, null, MovieDTO.class);
         
         Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
@@ -137,7 +137,7 @@ public class MovieControllerTest {
     @Test
     public void notFoundDeleteMovieById() {
         ResponseEntity<MovieDTO> response = this.testRestTemplate
-            .exchange("/movie/"+105452L, HttpMethod.DELETE, null, MovieDTO.class);
+            .exchange("/movie/"+ -2L, HttpMethod.DELETE, null, MovieDTO.class);
         
         Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
