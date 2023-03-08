@@ -1,9 +1,9 @@
 # Project for study of JPA Criteria
 
-## The application
+## A aplicação
 
-Simple application for movies register
+Aplicação de exemplo de JPA critéria com registro de filmes
 
 ## JPA Criteria
 
-the JPA criteria API is used by the get method in the MovieController, obtaining a list of films by the parameters passed
+O JPA criteria API é usado pelo método GET no MovieController, obtendo uma lista de filmes através do parâmetros passados.
