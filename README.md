@@ -1,4 +1,4 @@
-# projeto para estudo de JPA Criteria e Specification
+# Projeto para estudo de JPA Criteria e Specification
 
 ## A aplicação
 
