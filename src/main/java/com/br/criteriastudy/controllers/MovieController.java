@@ -6,6 +6,7 @@ import com.br.criteriastudy.repositories.criteria.params.MovieFilterParam;
 import com.br.criteriastudy.services.MovieService;
 import com.br.criteriastudy.services.DTO.MovieDTO;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class MovieController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MovieDTO>> getMovies(MovieFilterParam params) {
+    public ResponseEntity<List<MovieDTO>> getMovies(@ParameterObject MovieFilterParam params) {
         return ResponseEntity.ok().body(this.movieService.getAll(params));
     }
 

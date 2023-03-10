@@ -1,0 +1,1 @@
+INSERT INTO movie (id, title, sinopse, category, director, release_date) VALUES (1, 'Clube da Luta', 'Clube da Luta', 'ACTION', 'David Fincher', '1999-01-01');

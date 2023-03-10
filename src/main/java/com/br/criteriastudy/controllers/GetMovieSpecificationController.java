@@ -5,6 +5,7 @@ import com.br.criteriastudy.mapper.MovieMapper;
 import com.br.criteriastudy.repositories.MovieSpecificationRepository;
 import com.br.criteriastudy.repositories.criteria.params.MovieFilterSpecification;
 import com.br.criteriastudy.services.DTO.MovieDTO;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class GetMovieSpecificationController {
     // https://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-querydsl
     // https://www.youtube.com/watch?v=1bTg0tEJAqQ&ab_channel=DevEficiente
     @GetMapping("/movie/specification")
-    public ResponseEntity<List<MovieDTO>> execute(MovieFilterSpecification movieFilterSpecification, Pageable pageable) {
+    public ResponseEntity<List<MovieDTO>> execute(@ParameterObject MovieFilterSpecification movieFilterSpecification, @ParameterObject Pageable pageable) {
 
         Page<Movie> movies = movieSpecificationRepository.findAll(movieFilterSpecification, pageable);
         List<MovieDTO> moviesDto = movieMapper.toDto(movies.getContent());
