@@ -11,7 +11,7 @@ public class MovieDTO {
     
     private Long id;
     private String title;
-    private String sinopse;
+    private String synopsis;
     private CategoryEnum category;
     private String director;
     private LocalDate releaseDate;

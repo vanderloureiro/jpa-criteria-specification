@@ -1,1 +1,14 @@
-INSERT INTO movie (id, title, sinopse, category, director, release_date) VALUES (1, 'Clube da Luta', 'Clube da Luta', 'ACTION', 'David Fincher', '1999-01-01');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (1, 'Clube da Luta', 'Clube da Luta', 'ACTION', 'David Fincher', '1999-10-29');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (2, 'Django Livre', 'Django Livre', 'ACTION', 'Quentin Tarantino', '2013-01-18');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (3, 'Se7en - Os Sete Crimes Capitais', 'Se7en - Os Sete Crimes Capitais', 'ACTION', 'David Fincher', '1995-12-15');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (4, 'A Origem', 'A Origem', 'ACTION', 'Christopher Nolan', '2010-08-06');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (5, 'Ilha do Medo', 'Ilha do Medo', 'THRILLER', 'Martin Scorsese', '2010-03-12');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (6, 'Amnésia', 'Amnésia', 'THRILLER', 'Christopher Nolan', '2001-08-31');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (7, 'O Grande Truque', 'O Grande Truque', 'DRAMA', 'Christopher Nolan', '2006-11-02');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (8, 'Looper - Assassinos do Futuro', 'Looper - Assassinos do Futuro', 'ACTION', 'Rian Johnson', '2012-09-28');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (9, 'Dunkirk', 'Dunkirk', 'ACTION', 'Christopher Nolan', '2017-07-27');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (10, 'Interstellar', 'Interstellar', 'ADVENTURE', 'Christopher Nolan', '2014-11-06');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (11, 'Perdido em Marte', 'Perdido em Marte', 'ADVENTURE', 'Ridley Scott', '2015-10-01');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (12, 'Bastardos Inglórios', 'Bastardos Inglórios', 'DRAMA', 'Quentin Tarantino', '2009-10-09');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (13, 'Pulp Fiction', 'Pulp Fiction', 'ACTION', 'Quentin Tarantino', '1995-03-03');
+INSERT INTO movie (id, title, synopsis, category, director, release_date) VALUES (14, 'O Abutre', 'O Abutre', 'THRILLER', 'Dan Gilroy', '2014-11-07');

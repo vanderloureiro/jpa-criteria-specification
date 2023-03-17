@@ -5,7 +5,9 @@ import com.br.criteriastudy.mapper.MovieMapper;
 import com.br.criteriastudy.repositories.MovieSpecificationRepository;
 import com.br.criteriastudy.repositories.criteria.params.MovieFilterSpecification;
 import com.br.criteriastudy.services.DTO.MovieDTO;
+import jakarta.persistence.EntityManager;
 import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,15 @@ import java.util.List;
 @RestController
 public class GetMovieSpecificationController {
 
+    @Autowired
+    private EntityManager entityManager;
+
+    public Movie findById(Long id) {
+
+        Movie movie = entityManager.find(Movie.class, id);
+        return movie;
+    }
+
     private final MovieSpecificationRepository movieSpecificationRepository;
     private final MovieMapper movieMapper;
 
@@ -26,9 +37,6 @@ public class GetMovieSpecificationController {
         this.movieMapper = movieMapper;
     }
 
-    // https://www.baeldung.com/rest-api-search-language-spring-data-specifications
-    // https://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-querydsl
-    // https://www.youtube.com/watch?v=1bTg0tEJAqQ&ab_channel=DevEficiente
     @GetMapping("/movie/specification")
     public ResponseEntity<List<MovieDTO>> execute(@ParameterObject MovieFilterSpecification movieFilterSpecification, @ParameterObject Pageable pageable) {
 

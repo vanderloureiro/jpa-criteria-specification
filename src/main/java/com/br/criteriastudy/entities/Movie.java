@@ -26,7 +26,7 @@ public class Movie {
     private String title;
 
     @Column(nullable = false)
-    private String sinopse;
+    private String synopsis;
 
     @Enumerated(EnumType.STRING)
     private CategoryEnum category;

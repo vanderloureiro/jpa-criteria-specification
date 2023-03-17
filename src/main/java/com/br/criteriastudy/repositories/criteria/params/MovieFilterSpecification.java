@@ -21,13 +21,15 @@ public class MovieFilterSpecification implements Specification<Movie> {
 
     @Override
     public Predicate toPredicate(Root<Movie> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+
         List<Predicate> predicates = new ArrayList<>();
         if (StringUtils.isNotEmpty(this.title)) {
-            predicates.add(criteriaBuilder.equal(root.get("title"), this.title));
+            predicates.add(criteriaBuilder.like(root.get("title"), "%" + this.title + "%"));
         }
         if (this.category != null) {
             predicates.add(criteriaBuilder.equal(root.get("category"), this.category));
         }
+
         return criteriaBuilder.and(predicates.stream().toArray(Predicate[]::new));
     }
 }
